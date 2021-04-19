@@ -1,3 +1,4 @@
+import time
 import uuid
 from gestion_tienda import Tienda
 
@@ -20,7 +21,7 @@ while True:
     [9] Mostrar clientes
     ----------------------
     [a] Crear nuevo pedido
-    [b] Modificar pedido
+    [b] Modificar la cantidad de pedido
     [c] Consultar pedido
     [d] Eliminar pedido
     [e] Mostrar pedidos
@@ -32,39 +33,39 @@ while True:
 
     if operacion == "0": # CREAR NUEVO PRODUCTO
 
-        try:
-            tipo_producto = input("""\tElija el Tipo de Producto:
-                [0] Bebida
-                [1] Comida
-                --> """);
+        tipo_producto = input("""\tElija el Tipo de Producto:
+            [0] Bebida
+            [1] Comida
+            --> """);
 
-            while mi_tienda.validar_tipo_producto(tipo_producto) == False:
+        while mi_tienda.validar_tipo_producto(tipo_producto) == False:
 
-                print("Solo puede elegir entre los tipos Bebida y Comida");
-                tipo_producto = input("\tElija el Tipo de Producto:\n[0] Bebida\n[1] Comida\n--> ");
-            
-            tipo_producto = mi_tienda.formato_tipo_producto(tipo_producto);
+            print("Solo puede elegir entre los tipos Bebida y Comida");
+            tipo_producto = input("\tElija el Tipo de Producto:\n[0] Bebida\n[1] Comida\n--> ");
+        
+        tipo_producto = mi_tienda.formato_tipo_producto(tipo_producto);
 
-            nombre_producto = input("Introduzca Nombre del Producto: ");
-            marca_producto = input("Introduzca Marca del Producto: ");
+        nombre_producto = input("Introduzca Nombre del Producto: ");
+        marca_producto = input("Introduzca Marca del Producto: ");
+        precio_producto = input("Introduzca Precio del Producto: ");
+
+        while mi_tienda.validar_precio_producto(precio_producto) == True:
+            print("""Entrada errónea. Introduzca un precio sin separador de miles.
+            Si necesita decimales, use la coma.
+            Ej: 9,5 / 9,99 / 1000 / 10000""");
             precio_producto = input("Introduzca Precio del Producto: ");
 
-            while mi_tienda.validar_precio_producto(precio_producto) == True:
-                print("""Entrada errónea. Introduzca un precio sin separador de miles.
-                Si necesita decimales, use la coma.
-                Ej: 9,5 / 9,99 / 1000 / 10000""");
-                precio_producto = input("Introduzca Precio del Producto: ");
+        precio_producto = mi_tienda.formato_precio_producto(precio_producto);
 
-            precio_producto = mi_tienda.formato_precio_producto(precio_producto);
+        stock_producto = input("Introduzca Stock del Producto: ");
 
+        while stock_producto.isdigit() is not True:
+            print("No se admiten decimales, ni caracteres extraños o espacios");
             stock_producto = input("Introduzca Stock del Producto: ");
+        
+        stock_producto = int(stock_producto);
 
-            while stock_producto.isdigit() is not True:
-                print("No se admiten decimales, ni caracteres extraños o espacios");
-                stock_producto = input("Introduzca Stock del Producto: ");
-            
-            stock_producto = int(stock_producto);
-
+        try:
             print(mi_tienda.crear_producto(
                 tipo_producto, nombre_producto, marca_producto, precio_producto, stock_producto));
 
@@ -217,50 +218,49 @@ while True:
 
     elif operacion == "5": # CREAR NUEVO CLIENTE
         
-        try:
-            id_cliente = str(uuid.uuid4());
+        id_cliente = str(uuid.uuid4());
 
-            nombre_cliente = input("Introduzca el nombre del cliente que desea crear: ");
-            apellidos_cliente = input("Introduzca los apellidos: ");
+        nombre_cliente = input("Introduzca el nombre del cliente que desea crear: ");
+        apellidos_cliente = input("Introduzca los apellidos: ");
+        correo_cliente = input("Introduzca el correo electrónico: ");
+
+        while mi_tienda.validar_correo(correo_cliente) == False:
+            print("Introduzca un correo válido");
             correo_cliente = input("Introduzca el correo electrónico: ");
+        
+        telefono_cliente = input("Introduzca el teléfono del cliente: ");
 
-            while mi_tienda.validar_correo(correo_cliente) == False:
-                print("Introduzca un correo válido");
-                correo_cliente = input("Introduzca el correo electrónico: ");
-            
-            telefono_cliente = input("Introduzca el teléfono del cliente: ");
+        while telefono_cliente.isdigit() is not True:
+            print("Introduzca un teléfono válido");
+            telefono_cliente = input("Introduzca el nombre del cliente que desea crear: ");
 
-            while telefono_cliente.isdigit() is not True:
-                print("Introduzca un teléfono válido");
-                telefono_cliente = input("Introduzca el nombre del cliente que desea crear: ");
+        print("Para la dirección del cliente...");
+        calle = input("Introduzca calle, avenida, vía, etc: ");
+        portal = input("Introduzca número/letra de portal: ");
+        piso = input("Introduzca el piso: ");
 
-            print("Para la dirección del cliente...");
-            calle = input("Introduzca calle, avenida, vía, etc: ");
-            portal = input("Introduzca número/letra de portal: ");
+        while piso.isdigit() is not True:
+            print("Solo se admiten datos numéricos, sin decimales ni caracteres extraños o espacios");
             piso = input("Introduzca el piso: ");
+        
+        letra = input("Introduzca la letra: ");
 
-            while piso.isdigit() is not True:
-                print("Solo se admiten datos numéricos, sin decimales ni caracteres extraños o espacios");
-                piso = input("Introduzca el piso: ");
-            
+        while letra.isalpha() is not True:
+            print("Solo se admiten letras, sin caracteres extraños, espacios o números");
             letra = input("Introduzca la letra: ");
 
-            while letra.isalpha() is not True:
-                print("Solo se admiten letras, sin caracteres extraños, espacios o números");
-                letra = input("Introduzca la letra: ");
+        codigo_postal = input("Introduzca el código postal: ");
 
+        while codigo_postal.isdigit() is not True or len(codigo_postal) != 5:
+            print("El CP son 5 números sin decimales ni caracteres extraños o espacios");
             codigo_postal = input("Introduzca el código postal: ");
 
-            while codigo_postal.isdigit() is not True or len(codigo_postal) != 5:
-                print("El CP son 5 números sin decimales ni caracteres extraños o espacios");
-                codigo_postal = input("Introduzca el código postal: ");
+        direccion = mi_tienda.direccion_cliente(calle, portal, piso, letra, codigo_postal);
 
-            direccion = mi_tienda.direccion_cliente(calle, portal, piso, letra, codigo_postal);
-
+        try:
             print(mi_tienda.crear_cliente(
                 id_cliente, nombre_cliente, apellidos_cliente, correo_cliente, telefono_cliente, direccion
             ));
-
         except:
             print("Error inesperado al crear nuevo cliente");
             mi_tienda.log_app("Error inesperado al crear nuevo cliente");
@@ -426,19 +426,97 @@ while True:
             mi_tienda.log_app("Error inesperado al mostrar Lista de Clientes");
 
     elif operacion.lower() == "a": # CREAR NUEVO PEDIDO
-        pass
 
-    elif operacion.lower() == "b": # MODIFICAR PEDIDO
-        pass
+        id_pedido = str(uuid.uuid4());
 
-    elif operacion.lower() == "c": # CONSULTAR PEDIDOS
-        pass
+        id_cliente_pedidos = input("Introduzca ID del cliente que realiza el pedido: ");
+
+        while mi_tienda.validar_buscar_IDcliente(id_cliente_pedidos) == False:
+            print(f"No encuentro ID: {id_cliente_pedidos}");
+            id_cliente_pedidos = input("Introduzca ID del cliente que realiza el pedido: ");
+        
+        producto_pedido = input("Introduzca el nombre del producto para el pedido: ");
+
+        while mi_tienda.validar_buscar_producto(producto_pedido) == False:
+            print("No encuentro ese producto");
+            producto_pedido = input("Introduzca el nombre del producto para el pedido: ");
+        
+        cantidad_producto = input("Introduzca la cantidad de producto para el pedido: ");
+
+        while cantidad_producto.isdigit() is not True:
+            print("Solo se admiten datos numéricos, sin decimales ni caracteres extraños o espacios");
+            cantidad_producto = input("Introduzca la cantidad de producto para el pedido: ");
+        
+        cantidad_producto = float(cantidad_producto);
+
+        precio_total = mi_tienda.calc_precio_total(producto_pedido, cantidad_producto);
+        fecha_pedido = time.strftime('%d/%m/%Y %H:%M:%S');
+
+        try:
+            print(mi_tienda.crear_pedido(
+                id_pedido, id_cliente_pedidos, producto_pedido, cantidad_producto, precio_total, fecha_pedido
+            ));
+        except:
+            print("Error inesperado al crear pedido");
+            mi_tienda.log_app("Error inesperado al crear pedido");
+
+    elif operacion.lower() == "b": # MODIFICAR LA CANTIDAD DEL PEDIDO
+
+        id_buscar = input("Introduzca ID de Pedido que desea modificar: ");
+
+        while mi_tienda.validar_buscar_IDpedido(id_buscar) == False:
+            print(f"No encuentro ID: {id_buscar}");
+            id_buscar = input("Introduzca ID de Pedido que desea modificar: ");
+
+        nueva_cantidad = input("Introduzca nueva cantidad de producto para este pedido: ");
+
+        while nueva_cantidad.isdigit() is not True:
+            print("Solo se admiten datos numéricos, sin decimales ni caracteres extraños o espacios");
+            nueva_cantidad = input("Introduzca nueva cantidad de producto para este pedido: ");
+        
+        nueva_cantidad = float(nueva_cantidad);
+
+        try:
+            print(mi_tienda.modificar_pedido_cantidad(id_buscar, nueva_cantidad));
+        except:
+            print("Error inesperado al modificar la cantidad del pedido");
+            mi_tienda.log_app("Error inesperado al modificar la cantidad del pedido");
+
+    elif operacion.lower() == "c": # CONSULTAR PEDIDO
+
+        id_buscar = input("Introduzca ID de Pedido que desea consultar: ");
+
+        while mi_tienda.validar_buscar_IDpedido(id_buscar) == False:
+            print(f"No encuentro ID: {id_buscar}");
+            id_buscar = input("Introduzca ID de Pedido que desea consultar: ");
+        
+        try:
+            print(mi_tienda.consultar_pedido(id_buscar));
+        except:
+            print("Error inesperado al consultar pedido");
+            mi_tienda.log_app("Error inesperado al consultar pedido");
 
     elif operacion.lower() == "d": # ELIMINAR PEDIDO
-        pass
+
+        id_buscar = input("Introduzca ID de Pedido que desea eliminar: ");
+
+        while mi_tienda.validar_buscar_IDpedido(id_buscar) == False:
+            print(f"No encuentro ID: {id_buscar}");
+            id_buscar = input("Introduzca ID de Pedido que desea eliminar: ");
+        
+        try:
+            print(mi_tienda.eliminar_pedido(id_buscar));
+        except:
+            print("Error inesperado al eliminar pedido");
+            mi_tienda.log_app("Error inesperado al eliminar pedido");
     
     elif operacion.lower() == "e": # MOSTRAR TODOS LOS PEDIDOS
-        pass
+
+        try:
+            print(mi_tienda.mostrar_pedidos());
+        except:
+            print("Error inesperado al mostrar Lista de Pedidos");
+            mi_tienda.log_app("Error inesperado al mostrar Lista de Pedidos");
 
     elif operacion.lower() == "x":
         exit(0);

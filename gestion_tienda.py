@@ -51,7 +51,7 @@ class Tienda():
     
     def validar_precio_producto(self, precio_producto):
 
-        for caracter in "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ;%~$&¬ªº:/?¡¿!()[]}{¨ç´`^'·#*-+_. |<>=":
+        for caracter in "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ;%~$&¬ªº:/?¡¿!()[]}{¨ç´`^'·#*-+_. |<>=@":
             if caracter in precio_producto:
                 return True;
             elif precio_producto == "":
@@ -104,6 +104,21 @@ class Tienda():
         else:
             return True;
     
+    def validar_buscar_IDcliente(self, id_buscar):
+
+        for cliente in self.clientes:
+            if cliente.id_cliente == id_buscar:
+                return True;
+            return False;
+    
+    def validar_buscar_IDpedido(self, id_buscar):
+        
+        for pedido in self.pedidos:
+            if pedido.id_pedido == id_buscar:
+                return True;
+            return False;
+
+
     """def validar_buscar_cliente(self, nombre_cliente):
 
         nombre_cliente = self.formato_texto(nombre_cliente);
@@ -114,13 +129,6 @@ class Tienda():
                 return True;
             else:
                 return False; --> ESTA FUNCIÓN NO LA USARÉ YA QUE DECIDÍ BUSCAR POR ID"""
-    
-    def validar_buscar_IDcliente(self, id_buscar):
-
-        for cliente in self.clientes:
-            if cliente.id_cliente == id_buscar:
-                return True;
-            return False;
 
 
     # ----------------------------- FUNCIONES CREAR, MODIFICAR, CONSULTAR Y ELIMINAR -----------------------------
@@ -131,7 +139,7 @@ class Tienda():
         nuevo_producto = Producto(tipo, nombre, marca, precio, stock);
         self.productos.append(nuevo_producto);
 
-        self.log_app("Producto creado");
+        self.log_app(f"Producto creado:\n{nuevo_producto}");
         return f"Producto creado:\n{nuevo_producto}";
     
     def modificar_tipo_producto(self, nombre_producto, nuevo_tipo): # MODIFICAR TIPO PRODUCTO
@@ -252,6 +260,7 @@ class Tienda():
         };
         return direccion_cliente; 
     
+    # CREAR CLIENTE
     def crear_cliente(self, id_cliente, nombre_cliente, apellidos_cliente, correo_cliente, telefono_cliente, direccion):
 
         self.log_app(f"Creando cliente: {nombre_cliente}...");
@@ -262,7 +271,7 @@ class Tienda():
 
         self.clientes.append(nuevo_cliente);
 
-        self.log_app("Cliente creado");
+        self.log_app(f"Cliente creado:\n{nuevo_cliente}");
         return f"Cliente creado:\n{nuevo_cliente}";
 
     def modificar_nombre_cliente(self, id_buscar, nuevo_nombre): # MODIFICAR NOMBRE CLIENTE
@@ -317,6 +326,7 @@ class Tienda():
         self.log_app("Error inesperado modificar Apellidos de Cliente. Puede que no haya clientes en la lista");
         return False;
     
+    # MODIFICAR DIRECCIÓN CLIENTE
     def modificar_direccion_cliente(self, id_buscar, nueva_calle, nuevo_portal, nuevo_piso, nueva_letra, nuevo_codigo_postal, nueva_direccion):
         self.log_app(f"Modificando Dirección de Cliente de: {id_buscar}...");
 
@@ -334,7 +344,7 @@ class Tienda():
         self.log_app("Error inesperado modificar Dirección de Cliente. Puede que no haya clientes en la lista");
         return False;
     
-    def consultar_cliente(self, id_buscar):
+    def consultar_cliente(self, id_buscar): # CONSULTAR CLIENTE
         self.log_app(f"Consultando Cliente: {id_buscar}...");
 
         info_cliente = "ID\tNombre\tApellidos\tCorreo\tTelefono\tDirección\n\n";
@@ -347,9 +357,9 @@ class Tienda():
                 return False;
 
         self.log_app("Consulta de cliente realizada");
-        return f"{info_cliente}";
+        return info_cliente;
     
-    def eliminar_cliente(self, id_buscar):
+    def eliminar_cliente(self, id_buscar): # ELIMINAR CLIENTE
         self.log_app(f"Eliminando cliente {id_buscar}...");
 
         for cliente in self.clientes:
@@ -373,8 +383,99 @@ class Tienda():
 
         self.log_app("Lista de clientes mostrada");
         return f"{lista_clientes}\nHay {contador} clientes";
+    
+    def calc_precio_total(self, producto_pedido, cantidad_producto): # CALCULAR PRECIO TOTAL PEDIDO
+        self.log_app(f"Calculando precio total pedido...");
 
+        precio_unidad = 0.0;
 
-                
+        for producto in self.productos:
+            if producto.nombre == producto_pedido:
+                precio_unidad += producto.precio;
+            
+            else:
+                return False;
+        
+        precio_total = precio_unidad * cantidad_producto;
+        self.log_app(f"Precio total obtenido");
+        return precio_total;
+
+    def crear_pedido(self, id_pedido, id_cliente_pedidos, producto, cantidad, precio_total, fecha_pedido): # CREAR PEDIDO
+        self.log_app(f"Creando pedido de producto - {producto} - para cliente - {id_cliente_pedidos} -...");
+
+        nuevo_pedido = Pedido(
+            id_pedido, id_cliente_pedidos, producto, cantidad, precio_total, fecha_pedido
+        );
+
+        self.pedidos.append(nuevo_pedido);
+
+        self.log_app(f"Pedido creado:\n{nuevo_pedido}");
+        return f"Pedido creado:\n{nuevo_pedido}";
+
+    def modificar_pedido_cantidad(self, id_buscar, nueva_cantidad): # MODIFICAR CANTIDAD DEL PEDIDO
+        self.log_app(f"Modificando Cantidad del Pedido: {id_buscar}..."); 
+
+        for pedido in self.pedidos:
+            if pedido.id_pedido == id_buscar:
+                pedido.cantidad = nueva_cantidad;
+                producto_pedido = pedido.producto;
+                pedido.precio_total = self.calc_precio_total(producto_pedido, nueva_cantidad);
+            
+            self.log_app(f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado");
+            return f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado";
+
+        self.log_app("Error inesperado modificar Cantidad de Pedido. Puede que no haya pedidos en la lista");
+        return False;
+    
+    def consultar_pedido(self, id_buscar):  # CONSULTAR PEDIDO
+        self.log_app(f"Consultando Pedido: {id_buscar}...");
+
+        info_pedido = "ID_Pedido\tID_Cliente\tProducto\tCantidad\tPrecio Total\tFecha\n\n";
+
+        for pedido in self.pedidos:
+            if pedido.id_pedido == id_buscar:
+                info_pedido += str(pedido) + "\n";
+                for cliente in self.clientes:
+                    if pedido.id_cliente_pedidos == cliente.id_cliente:
+                        info_pedido += f"-- > Pedido para el cliente: - {cliente.id_cliente} - {cliente.nombre} {cliente.apellidos} -\n\n"
+            else:
+                return False;
+
+        self.log_app("Consulta de pedido realizada");
+        return info_pedido;
+    
+    def eliminar_pedido(self, id_buscar): # ELIMINAR PEDIDO
+        self.log_app(f"Eliminando pedido {id_buscar}...");
+
+        for pedido in self.pedidos:
+            if pedido.id_pedido == id_buscar:
+                self.pedidos.remove(pedido);
+            else:
+                return False;
+        
+        self.log_app(f"Pedido - {id_buscar} - eliminado");
+        return f"Pedido - {id_buscar} - eliminado";
+        
+    def mostrar_pedidos(self): # MOSTRAR LISTA DE PEDIDOS
+        self.log_app(f"Mostrando Lista de Pedidos...");
+
+        contador = 0;
+        lista_pedidos = "ID_Pedido\tID_Cliente\tProducto\tCantidad\tPrecio Total\tFecha\n\n";
+
+        for pedido in self.pedidos:
+            lista_pedidos += str(pedido) + "\n";
+            for cliente in self.clientes:
+                if pedido.id_cliente_pedidos == cliente.id_cliente:
+                    lista_pedidos += f"-- > Pedido para el cliente: - {cliente.id_cliente} - {cliente.nombre} {cliente.apellidos} -\n\n"
+            contador += 1;
+
+        self.log_app("Lista de pedidos mostrada");
+        return f"{lista_pedidos}\nHay {contador} pedidos";
 
     # ----------------------------- FUNCIONES JSON -----------------------------
+
+    def guardar_json(self): # crear fichero "datos_gestion_tienda.json" con 3 diccionarios para productos clientes y pedidos
+        pass
+
+    def cargar_json(self): # abrir fichero "datos_gestion_tienda.json" y cargar productos clientes y pedidos en sus listas
+        pass

@@ -25,3 +25,9 @@ direccion_cliente = {
 direccion_cliente["Calle"] = 10
 
 print(direccion_cliente)
+
+import time
+
+fecha = time.strftime('%d/%m/%Y %H:%M:%S')
+
+print(fecha)
