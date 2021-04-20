@@ -76,8 +76,8 @@ class Tienda():
 
             if self.formato_texto(producto.nombre) == nombre:
                 return True;
-            else:
-                return False;
+        
+        return False;
 
     def validar_campo_modificar(self, campo):
         if campo == "0":
@@ -109,27 +109,14 @@ class Tienda():
         for cliente in self.clientes:
             if cliente.id_cliente == id_buscar:
                 return True;
-            return False;
+        return False;
     
     def validar_buscar_IDpedido(self, id_buscar):
         
         for pedido in self.pedidos:
             if pedido.id_pedido == id_buscar:
                 return True;
-            return False;
-
-
-    """def validar_buscar_cliente(self, nombre_cliente):
-
-        nombre_cliente = self.formato_texto(nombre_cliente);
-
-        for cliente in self.clientes:
-
-            if self.formato_texto(cliente.nombre) == nombre_cliente:
-                return True;
-            else:
-                return False; --> ESTA FUNCIÓN NO LA USARÉ YA QUE DECIDÍ BUSCAR POR ID"""
-
+        return False;
 
     # ----------------------------- FUNCIONES CREAR, MODIFICAR, CONSULTAR Y ELIMINAR -----------------------------
 
@@ -149,8 +136,8 @@ class Tienda():
             if producto.nombre == nombre_producto:
                 producto.tipo = nuevo_tipo;
             
-            self.log_app(f"Tipo de Producto de - {nombre_producto} - modificado a {nuevo_tipo}");
-            return f"Tipo de Producto de - {nombre_producto} - modificado a {nuevo_tipo}";
+                self.log_app(f"Tipo de Producto de - {nombre_producto} - modificado a {nuevo_tipo}");
+                return f"Tipo de Producto de - {nombre_producto} - modificado a {nuevo_tipo}";
 
         self.log_app("Error inesperado modificar Tipo de Producto. Puede que no haya productos en la lista");
         return False;
@@ -162,8 +149,8 @@ class Tienda():
             if producto.nombre == nombre_producto:
                 producto.nombre = nuevo_nombre;
             
-            self.log_app(f"Nombre de Producto de - {nombre_producto} - modificado a {nuevo_nombre}");
-            return f"Nombre de Producto de - {nombre_producto} - modificado a {nuevo_nombre}";
+                self.log_app(f"Nombre de Producto de - {nombre_producto} - modificado a {nuevo_nombre}");
+                return f"Nombre de Producto de - {nombre_producto} - modificado a {nuevo_nombre}";
 
         self.log_app("Error inesperado modificar Nombre de Producto. Puede que no haya productos en la lista");
         return False;
@@ -175,8 +162,8 @@ class Tienda():
             if producto.nombre == nombre_producto:
                 producto.marca = nueva_marca;
             
-            self.log_app(f"Marca de Producto de - {nombre_producto} - modificada a {nueva_marca}");
-            return f"Marca de Producto de - {nombre_producto} - modificada a {nueva_marca}";
+                self.log_app(f"Marca de Producto de - {nombre_producto} - modificada a {nueva_marca}");
+                return f"Marca de Producto de - {nombre_producto} - modificada a {nueva_marca}";
 
         self.log_app("Error inesperado modificar Marca de Producto. Puede que no haya productos en la lista");
         return False;
@@ -188,8 +175,8 @@ class Tienda():
             if producto.nombre == nombre_producto:
                 producto.precio = nuevo_precio;
             
-            self.log_app(f"Precio de Producto de - {nombre_producto} - modificado a {nuevo_precio}");
-            return f"Precio de Producto de - {nombre_producto} - modificado a {nuevo_precio}";
+                self.log_app(f"Precio de Producto de - {nombre_producto} - modificado a {nuevo_precio}");
+                return f"Precio de Producto de - {nombre_producto} - modificado a {nuevo_precio}";
 
         self.log_app("Error inesperado modificar Precio de Producto. Puede que no haya productos en la lista");
         return False;
@@ -201,8 +188,8 @@ class Tienda():
             if producto.nombre == nombre_producto:
                 producto.stock = nuevo_stock;
             
-            self.log_app(f"Stock de Producto de - {nombre_producto} - modificado a {nuevo_stock}");
-            return f"Stock de Producto de - {nombre_producto} - modificado a {nuevo_stock}";
+                self.log_app(f"Stock de Producto de - {nombre_producto} - modificado a {nuevo_stock}");
+                return f"Stock de Producto de - {nombre_producto} - modificado a {nuevo_stock}";
 
         self.log_app("Error inesperado modificar Stock de Producto. Puede que no haya productos en la lista");
         return False;
@@ -215,9 +202,6 @@ class Tienda():
         for producto in self.productos:
             if producto.nombre == nombre_producto:
                 consulta_producto += str(producto) + "\n";
-            
-            else:
-                return False;
 
         self.log_app("Consulta de producto realizada");
         return consulta_producto;
@@ -228,11 +212,9 @@ class Tienda():
         for producto in self.productos:
             if producto.nombre == nombre_producto:
                 self.productos.remove(producto);
-            else:
-                return False;
         
-        self.log_app(f"Producto - {nombre_producto} - eliminado");
-        return f"Producto - {nombre_producto} - eliminado";
+                self.log_app(f"Producto - {nombre_producto} - eliminado");
+                return f"Producto - {nombre_producto} - eliminado";
 
     def mostrar_productos(self): # MOSTRAR LISTA DE PRODUCTOS
         self.log_app(f"Mostrando todos los productos...");
@@ -256,7 +238,7 @@ class Tienda():
             "Portal": portal,
             "Piso": piso,
             "Letra": letra,
-            "Código Postal": codigo_postal,
+            "Codigo Postal": codigo_postal,
         };
         return direccion_cliente; 
     
@@ -281,8 +263,8 @@ class Tienda():
             if cliente.id_cliente == id_buscar:
                 cliente.nombre = nuevo_nombre;
             
-            self.log_app(f"Nombre de Cliente de - {id_buscar} - modificado a {nuevo_nombre}");
-            return f"Nombre de Cliente de - {id_buscar} - modificado a {nuevo_nombre}";
+                self.log_app(f"Nombre de Cliente de - {id_buscar} - modificado a {nuevo_nombre}");
+                return f"Nombre de Cliente de - {id_buscar} - modificado a {nuevo_nombre}";
 
         self.log_app("Error inesperado modificar Nombre de Cliente. Puede que no haya clientes en la lista");
         return False;
@@ -294,8 +276,8 @@ class Tienda():
             if cliente.id_cliente == id_buscar:
                 cliente.apellidos = nuevo_apellidos;
             
-            self.log_app(f"Apellidos de Cliente de - {id_buscar} - modificados a {nuevo_apellidos}");
-            return f"Apellidos de Cliente de - {id_buscar} - modificados a {nuevo_apellidos}";
+                self.log_app(f"Apellidos de Cliente de - {id_buscar} - modificados a {nuevo_apellidos}");
+                return f"Apellidos de Cliente de - {id_buscar} - modificados a {nuevo_apellidos}";
 
         self.log_app("Error inesperado modificar Apellidos de Cliente. Puede que no haya clientes en la lista");
         return False;
@@ -307,8 +289,8 @@ class Tienda():
             if cliente.id_cliente == id_buscar:
                 cliente.correo = nuevo_correo;
             
-            self.log_app(f"Correo de Cliente de - {id_buscar} - modificado a {nuevo_correo}");
-            return f"Correo de Cliente de - {id_buscar} - modificado a {nuevo_correo}";
+                self.log_app(f"Correo de Cliente de - {id_buscar} - modificado a {nuevo_correo}");
+                return f"Correo de Cliente de - {id_buscar} - modificado a {nuevo_correo}";
 
         self.log_app("Error inesperado modificar Apellidos de Cliente. Puede que no haya clientes en la lista");
         return False;
@@ -320,8 +302,8 @@ class Tienda():
             if cliente.id_cliente == id_buscar:
                 cliente.telefono = nuevo_telefono;
             
-            self.log_app(f"Teléfono de Cliente de - {id_buscar} - modificado a {nuevo_telefono}");
-            return f"Teléfono de Cliente de - {id_buscar} - modificado a {nuevo_telefono}";
+                self.log_app(f"Teléfono de Cliente de - {id_buscar} - modificado a {nuevo_telefono}");
+                return f"Teléfono de Cliente de - {id_buscar} - modificado a {nuevo_telefono}";
 
         self.log_app("Error inesperado modificar Apellidos de Cliente. Puede que no haya clientes en la lista");
         return False;
@@ -338,8 +320,8 @@ class Tienda():
                 cliente.direccion["Letra"] = nueva_letra;
                 cliente.direccion["Código Postal"] = nuevo_codigo_postal;
             
-            self.log_app(f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}");
-            return f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}";
+                self.log_app(f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}");
+                return f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}";
         
         self.log_app("Error inesperado modificar Dirección de Cliente. Puede que no haya clientes en la lista");
         return False;
@@ -353,9 +335,6 @@ class Tienda():
             if cliente.id_cliente == id_buscar:
                 info_cliente += str(cliente) + "\n";
 
-            else:
-                return False;
-
         self.log_app("Consulta de cliente realizada");
         return info_cliente;
     
@@ -365,11 +344,9 @@ class Tienda():
         for cliente in self.clientes:
             if cliente.id_cliente == id_buscar:
                 self.clientes.remove(cliente);
-            else:
-                return False;
         
-        self.log_app(f"Cliente - {id_buscar} - eliminado");
-        return f"Cliente - {id_buscar} - eliminado";
+                self.log_app(f"Cliente - {id_buscar} - eliminado");
+                return f"Cliente - {id_buscar} - eliminado";
     
     def mostrar_clientes(self): # MOSTRAR LISTA DE CLIENTES
         self.log_app(f"Mostrando Lista de Clientes...");
@@ -388,15 +365,13 @@ class Tienda():
         self.log_app(f"Calculando precio total pedido...");
 
         precio_unidad = 0.0;
+        precio_total = 0.0;
 
         for producto in self.productos:
             if producto.nombre == producto_pedido:
                 precio_unidad += producto.precio;
-            
-            else:
-                return False;
-        
-        precio_total = precio_unidad * cantidad_producto;
+                precio_total += precio_unidad * cantidad_producto;
+
         self.log_app(f"Precio total obtenido");
         return precio_total;
 
@@ -419,10 +394,11 @@ class Tienda():
             if pedido.id_pedido == id_buscar:
                 pedido.cantidad = nueva_cantidad;
                 producto_pedido = pedido.producto;
-                pedido.precio_total = self.calc_precio_total(producto_pedido, nueva_cantidad);
+                nuevo_precio_total = self.calc_precio_total(producto_pedido, nueva_cantidad)
+                pedido.precio_total = nuevo_precio_total;
             
-            self.log_app(f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado");
-            return f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado";
+                self.log_app(f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado a - {nuevo_precio_total} -");
+                return f"Cantidad de Pedido - {id_buscar} - {producto_pedido} - modificada a - {nueva_cantidad} - Precio total modificado a - {nuevo_precio_total} -";
 
         self.log_app("Error inesperado modificar Cantidad de Pedido. Puede que no haya pedidos en la lista");
         return False;
@@ -438,8 +414,6 @@ class Tienda():
                 for cliente in self.clientes:
                     if pedido.id_cliente_pedidos == cliente.id_cliente:
                         info_pedido += f"-- > Pedido para el cliente: - {cliente.id_cliente} - {cliente.nombre} {cliente.apellidos} -\n\n"
-            else:
-                return False;
 
         self.log_app("Consulta de pedido realizada");
         return info_pedido;
@@ -450,11 +424,9 @@ class Tienda():
         for pedido in self.pedidos:
             if pedido.id_pedido == id_buscar:
                 self.pedidos.remove(pedido);
-            else:
-                return False;
         
-        self.log_app(f"Pedido - {id_buscar} - eliminado");
-        return f"Pedido - {id_buscar} - eliminado";
+                self.log_app(f"Pedido - {id_buscar} - eliminado");
+                return f"Pedido - {id_buscar} - eliminado";
         
     def mostrar_pedidos(self): # MOSTRAR LISTA DE PEDIDOS
         self.log_app(f"Mostrando Lista de Pedidos...");
@@ -474,8 +446,86 @@ class Tienda():
 
     # ----------------------------- FUNCIONES JSON -----------------------------
 
-    def guardar_json(self): # crear fichero "datos_gestion_tienda.json" con 3 diccionarios para productos clientes y pedidos
-        pass
+    def guardar_json_productos(self):
+        self.log_app("Guardando listas de productos en json");
 
-    def cargar_json(self): # abrir fichero "datos_gestion_tienda.json" y cargar productos clientes y pedidos en sus listas
-        pass
+        with open("lista_productos.json", "w") as lista_productos:
+
+            datos_productos = {"productos": []};
+            for producto in self.productos:
+                datos_productos["productos"].append(producto.formato_json());
+            
+            json.dump(datos_productos, lista_productos);
+        
+        self.log_app("Lista de productos guardada en json");
+    
+    def guardar_json_clientes(self):
+        self.log_app("Guardando listas de clientes en json");
+
+        with open("lista_clientes.json", "w") as lista_clientes:
+            
+            datos_clientes = {"clientes": []};
+            for cliente in self.clientes:
+                datos_clientes["clientes"].append(cliente.formato_json());
+            
+            json.dump(datos_clientes, lista_clientes);
+        
+        self.log_app("Lista de clientes guardada en json");
+
+    def guardar_json_pedidos(self):
+        self.log_app("Guardando lista de pedidos en json");
+
+        with open("lista_pedidos.json", "w") as lista_pedidos:
+            
+            datos_pedidos = {"pedidos": []};
+            for pedido in self.pedidos:
+                datos_pedidos["pedidos"].append(pedido.formato_json());
+            
+            json.dump(datos_pedidos, lista_pedidos);
+
+        self.log_app("Lista de pedidos guardada en json");
+
+    def cargar_json_productos(self):
+        self.log_app("Cargando 'lista_productos.json' en lista de productos");
+
+        with open("lista_productos.json", "r") as lista_productos:
+
+            cargar_lista_productos = json.load(lista_productos);
+
+            for producto in cargar_lista_productos["productos"]:
+
+                self.crear_producto(
+                    producto["Tipo de Producto"], producto["Nombre"], producto["Marca"], producto["Precio/Unidad"], producto["Stock"]
+                );
+        
+        self.log_app("'lista_productos.json' cargada en lista de productos");
+    
+    def cargar_json_clientes(self):
+        self.log_app("Cargando 'lista_clientes.json' en lista de clientes");
+
+        with open("lista_clientes.json", "r") as lista_clientes:
+
+            cargar_lista_clientes = json.load(lista_clientes);
+            
+            for cliente in cargar_lista_clientes["clientes"]:
+
+                self.crear_cliente(
+                    cliente["ID_Cliente"], cliente["Nombre"], cliente["Apellidos"], cliente["Correo"], cliente["Telefono"], cliente["Direccion"]
+                );
+        
+        self.log_app("'lista_clientes.json' cargada en lista de clientes");
+    
+    def cargar_json_pedidos(self):
+        self.log_app("Cargando 'lista_pedidos.json' en lista de pedidos");
+
+        with open("lista_pedidos.json", "r") as lista_pedidos:
+
+            cargar_lista_pedidos = json.load(lista_pedidos);
+            
+            for pedido in cargar_lista_pedidos["pedidos"]:
+
+                self.crear_pedido(
+                    pedido["ID_Pedido"], pedido["ID_Cliente"], pedido["Producto"], pedido["Cantidad"], pedido["Precio_total"], pedido["Fecha_pedido"]
+                );
+
+        self.log_app("'lista_pedidos.json' cargada en lista de pedidos");

@@ -3,7 +3,9 @@ import uuid
 from gestion_tienda import Tienda
 
 mi_tienda = Tienda();
-#mi_tienda.cargar_json();
+mi_tienda.cargar_json_productos();
+mi_tienda.cargar_json_clientes();
+mi_tienda.cargar_json_pedidos();
 
 while True:
 
@@ -72,6 +74,12 @@ while True:
         except:
             print("Error inesperado al crear el producto");
             mi_tienda.log_app("Error inesperado al crear el producto");
+        
+        try:
+            mi_tienda.log_app("Guardando lista productos en json");
+            mi_tienda.guardar_json_productos();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
     elif operacion == "1": # MODIFICAR PRODUCTO
         
@@ -102,6 +110,12 @@ while True:
             except:
                 print("Error inesperado al modificar Tipo de Producto");
                 mi_tienda.log_app("Error inesperado modificar Tipo de Producto");
+            
+            try:
+                mi_tienda.log_app("Guardando lista productos en json");
+                mi_tienda.guardar_json_productos();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
         elif campo_modificar == "1": # MODIFICAR NOMBRE DE PRODUCTO
 
@@ -118,6 +132,12 @@ while True:
             except:
                 print("Error inesperado al modificar Nombre de Producto");
                 mi_tienda.log_app("Error inesperado modificar Nombre de Producto");
+            
+            try:
+                mi_tienda.log_app("Guardando lista productos en json");
+                mi_tienda.guardar_json_productos();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
         elif campo_modificar == "2": # MODIFICAR MARCA DE PRODUCTO
 
@@ -134,6 +154,12 @@ while True:
             except:
                 print("Error inesperado al modificar Marca de Producto");
                 mi_tienda.log_app("Error inesperado modificar Marca de Producto");
+            
+            try:
+                mi_tienda.log_app("Guardando lista productos en json");
+                mi_tienda.guardar_json_productos();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
         elif campo_modificar == "3": # MODIFICAR PRECIO DE PRODUCTO
 
@@ -158,6 +184,12 @@ while True:
             except:
                 print("Error inesperado al modificar Precio de Producto");
                 mi_tienda.log_app("Error inesperado Precio de Producto");
+            
+            try:
+                mi_tienda.log_app("Guardando lista productos en json");
+                mi_tienda.guardar_json_productos();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
         else: # MODIFICAR STOCK DE PRODUCTO
 
@@ -180,6 +212,12 @@ while True:
             except:
                 print("Error inesperado al modificar Stock de Producto");
                 mi_tienda.log_app("Error inesperado Stock de Producto");
+            
+            try:
+                mi_tienda.log_app("Guardando lista productos en json");
+                mi_tienda.guardar_json_productos();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
     elif operacion == "2": # CONSULTAR PRODUCTO
 
@@ -208,6 +246,12 @@ while True:
         except:
             print("Error inesperado al eliminar el producto");
             mi_tienda.log_app("Error inesperado al eliminar el producto");
+        
+        try:
+            mi_tienda.log_app("Guardando lista productos en json");
+            mi_tienda.guardar_json_productos();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
     elif operacion == "4": # MOSTRAR LISTA DE PRODUCTOS
         try:
@@ -264,6 +308,12 @@ while True:
         except:
             print("Error inesperado al crear nuevo cliente");
             mi_tienda.log_app("Error inesperado al crear nuevo cliente");
+        
+        try:
+            mi_tienda.log_app("Guardando lista clientes en json");
+            mi_tienda.guardar_json_clientes();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
     elif operacion == "6": # MODIFICAR CLIENTE
 
@@ -292,6 +342,12 @@ while True:
             except:
                 print("Error inesperado al modificar Nombre de Cliente");
                 mi_tienda.log_app("Error inesperado modificar Nombre de Cliente");
+            
+            try:
+                mi_tienda.log_app("Guardando lista clientes en json");
+                mi_tienda.guardar_json_clientes();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
         elif campo_modificar == "1": # MODIFICAR APELLIDOS DE CLIENTE
 
@@ -308,6 +364,13 @@ while True:
             except:
                 print("Error inesperado al modificar Apellidos de Cliente");
                 mi_tienda.log_app("Error inesperado modificar Apellidos de Cliente");
+            
+            try:
+                mi_tienda.log_app("Guardando lista clientes en json");
+                mi_tienda.guardar_json_clientes();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
+                
 
         elif campo_modificar == "2": # MODIFICAR CORREO DE CLIENTE
 
@@ -328,6 +391,12 @@ while True:
             except:
                 print("Error inesperado al modificar Correo de Cliente");
                 mi_tienda.log_app("Error inesperado modificar Correo de Cliente");
+            
+            try:
+                mi_tienda.log_app("Guardando lista clientes en json");
+                mi_tienda.guardar_json_clientes();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
         elif campo_modificar == "3": # MODIFICAR TELÉFONO DE CLIENTE
             
@@ -348,6 +417,12 @@ while True:
             except:
                 print("Error inesperado al modificar Teléfono de Cliente");
                 mi_tienda.log_app("Error inesperado modificar Teléfono de Cliente");
+            
+            try:
+                mi_tienda.log_app("Guardando lista clientes en json");
+                mi_tienda.guardar_json_clientes();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
         else: # MODIFICAR DIRECCIÓN DE CLIENTE
 
@@ -389,6 +464,12 @@ while True:
             except:
                 print("Error inesperado al modificar nueva dirección de cliente");
                 mi_tienda.log_app("Error inesperado al modificar nueva dirección de cliente");
+            
+            try:
+                mi_tienda.log_app("Guardando lista clientes en json");
+                mi_tienda.guardar_json_clientes();
+            except:
+                mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
     elif operacion == "7": # CONSULTAR CLIENTE
 
@@ -417,6 +498,12 @@ while True:
         except:
             print("Error inesperado al eliminar cliente");
             mi_tienda.log_app("Error inesperado al eliminar cliente");
+        
+        try:
+            mi_tienda.log_app("Guardando lista clientes en json");
+            mi_tienda.guardar_json_clientes();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
     elif operacion == "9": # MOSTRAR LISTA DE CLIENTES
         try:
@@ -459,6 +546,12 @@ while True:
         except:
             print("Error inesperado al crear pedido");
             mi_tienda.log_app("Error inesperado al crear pedido");
+        
+        try:
+            mi_tienda.log_app("Guardando lista pedidos en json");
+            mi_tienda.guardar_json_pedidos();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista pedidos en json");
 
     elif operacion.lower() == "b": # MODIFICAR LA CANTIDAD DEL PEDIDO
 
@@ -481,6 +574,12 @@ while True:
         except:
             print("Error inesperado al modificar la cantidad del pedido");
             mi_tienda.log_app("Error inesperado al modificar la cantidad del pedido");
+        
+        try:
+            mi_tienda.log_app("Guardando lista pedidos en json");
+            mi_tienda.guardar_json_pedidos();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista pedidos en json");
 
     elif operacion.lower() == "c": # CONSULTAR PEDIDO
 
@@ -509,6 +608,12 @@ while True:
         except:
             print("Error inesperado al eliminar pedido");
             mi_tienda.log_app("Error inesperado al eliminar pedido");
+        
+        try:
+            mi_tienda.log_app("Guardando lista pedidos en json");
+            mi_tienda.guardar_json_pedidos();
+        except:
+            mi_tienda.log_app("Error inesperado al guardar lista pedidos en json");
     
     elif operacion.lower() == "e": # MOSTRAR TODOS LOS PEDIDOS
 

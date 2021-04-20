@@ -20,5 +20,5 @@ class Pedido():
             "Producto": self.producto,
             "Cantidad": self.cantidad,
             "Precio_total": self.precio_total,
-            "Fecha pedido": self.fecha_pedido,
+            "Fecha_pedido": self.fecha_pedido,
         };

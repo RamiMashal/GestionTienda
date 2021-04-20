@@ -19,6 +19,6 @@ class Cliente():
             "Nombre": self.nombre,
             "Apellidos": self.apellidos,
             "Correo": self.correo,
-            "Teléfono": self.telefono,
-            "Dirección": self.direccion
+            "Telefono": self.telefono,
+            "Direccion": self.direccion
         };

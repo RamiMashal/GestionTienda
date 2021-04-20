@@ -1,0 +1,18 @@
+{
+    "productos": [
+        {
+            "Tipo de Producto": "Bebida",
+            "Nombre": "fanta2",
+            "Marca": "fanta",
+            "Precio/Unidad": 1.0,
+            "Stock": 100
+        },
+        {
+            "Tipo de Producto": "Bebida",
+            "Nombre": "coca light",
+            "Marca": "cocacola",
+            "Precio/Unidad": 1.5,
+            "Stock": 100
+        }
+    ]
+}
