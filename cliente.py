@@ -22,3 +22,7 @@ class Cliente():
             "Telefono": self.telefono,
             "Direccion": self.direccion
         };
+    
+    def formato_csv(self):
+
+        return f"{self.id_cliente},{self.nombre},{self.apellidos},{self.correo},{self.telefono},{self.direccion}";

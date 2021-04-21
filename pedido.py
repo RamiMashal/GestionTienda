@@ -22,3 +22,7 @@ class Pedido():
             "Precio_total": self.precio_total,
             "Fecha_pedido": self.fecha_pedido,
         };
+    
+    def formato_csv(self):
+
+        return f"{self.id_pedido},{self.id_cliente_pedidos},{self.producto},{self.cantidad},{self.precio_total},{self.fecha_pedido}";

@@ -1,5 +1,6 @@
 import time
 import json
+import pandas as pd
 
 from producto import Producto
 from cliente import Cliente
@@ -58,6 +59,8 @@ class Tienda():
                 return True;
             elif precio_producto == ",":
                 return True;
+            else:
+                return False;
 
     def formato_precio_producto(self, precio_producto):
 
@@ -201,7 +204,7 @@ class Tienda():
 
         for producto in self.productos:
             if producto.nombre == nombre_producto:
-                consulta_producto += str(producto) + "\n";
+                consulta_producto += str(producto) + "\n\n";
 
         self.log_app("Consulta de producto realizada");
         return consulta_producto;
@@ -223,7 +226,7 @@ class Tienda():
         lista_productos = "Tipo\tNombre\tMarca\tPrecio\tStock\n\n";
 
         for producto in self.productos:
-            lista_productos += str(producto) + "\n";
+            lista_productos += str(producto) + "\n\n";
             contador += 1;
 
         self.log_app("Lista de productos mostrada");
@@ -318,7 +321,7 @@ class Tienda():
                 cliente.direccion["Portal"] = nuevo_portal;
                 cliente.direccion["Piso"] = nuevo_piso;
                 cliente.direccion["Letra"] = nueva_letra;
-                cliente.direccion["Código Postal"] = nuevo_codigo_postal;
+                cliente.direccion["Codigo Postal"] = nuevo_codigo_postal;
             
                 self.log_app(f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}");
                 return f"Dirección de Cliente de - {id_buscar} - modificada a {nueva_direccion}";
@@ -333,7 +336,7 @@ class Tienda():
 
         for cliente in self.clientes:
             if cliente.id_cliente == id_buscar:
-                info_cliente += str(cliente) + "\n";
+                info_cliente += str(cliente) + "\n\n";
 
         self.log_app("Consulta de cliente realizada");
         return info_cliente;
@@ -355,7 +358,7 @@ class Tienda():
         lista_clientes = "ID\tNombre\tApellidos\tCorreo\tTelefono\tDirección\n\n";
 
         for cliente in self.clientes:
-            lista_clientes += str(cliente) + "\n";
+            lista_clientes += str(cliente) + "\n\n";
             contador += 1;
 
         self.log_app("Lista de clientes mostrada");
@@ -529,3 +532,19 @@ class Tienda():
                 );
 
         self.log_app("'lista_pedidos.json' cargada en lista de pedidos");
+    
+    # ----------------------------- FUNCIONES ANALÍTICA -----------------------------
+
+    def crear_csv_pedidos(self):
+        self.log_app("Guardando csv pedidos");
+
+        with open("csv_pedidos.csv", "w") as csv_pedidos:
+
+            columnas = "ID_Pedido,ID_Cliente,Producto,Cantidad,Precio_total,Fecha_pedido";
+            csv_pedidos.write(columnas + "\n");
+            for pedido in self.pedidos:
+                fila = pedido.formato_csv() + "\n";
+                csv_pedidos.write(fila);
+        
+        self.log_app("Csv guardado");
+

@@ -1,31 +1,17 @@
 {
     "clientes": [
         {
-            "ID_Cliente": "d7fb58ea-590b-4e1f-ba53-8fcf7c60bc71",
-            "Nombre": "mar\u00eda",
-            "Apellidos": "s\u00e1enz",
-            "Correo": "maria@gmail.com",
-            "Telefono": "659",
+            "ID_Cliente": "d5640a72-bc47-4465-b532-1f9a586a7200",
+            "Nombre": "Rami",
+            "Apellidos": "Mashal",
+            "Correo": "ramimfn@gmail.com",
+            "Telefono": "657505525",
             "Direccion": {
-                "Calle": "quero",
+                "Calle": "Ileescas",
                 "Portal": "129",
                 "Piso": "2",
                 "Letra": "c",
                 "Codigo Postal": "28024"
-            }
-        },
-        {
-            "ID_Cliente": "a7e584d3-e6a6-4410-a0cc-c71197be5857",
-            "Nombre": "ramirez",
-            "Apellidos": "fontenl\u00e1",
-            "Correo": "ramiro@gmail.com",
-            "Telefono": "65747",
-            "Direccion": {
-                "Calle": "ilescas",
-                "Portal": "423",
-                "Piso": "5",
-                "Letra": "f",
-                "Codigo Postal": "54236"
             }
         }
     ]

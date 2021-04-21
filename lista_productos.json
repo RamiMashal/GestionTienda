@@ -2,16 +2,23 @@
     "productos": [
         {
             "Tipo de Producto": "Bebida",
-            "Nombre": "fanta2",
+            "Nombre": "fanta",
             "Marca": "fanta",
             "Precio/Unidad": 1.0,
-            "Stock": 100
+            "Stock": 1000
+        },
+        {
+            "Tipo de Producto": "Comida",
+            "Nombre": "carne",
+            "Marca": "campofr\u00edo",
+            "Precio/Unidad": 5.0,
+            "Stock": 1000
         },
         {
             "Tipo de Producto": "Bebida",
-            "Nombre": "coca light",
-            "Marca": "cocacola",
-            "Precio/Unidad": 1.5,
+            "Nombre": "coca",
+            "Marca": "coca",
+            "Precio/Unidad": 1.0,
             "Stock": 100
         }
     ]

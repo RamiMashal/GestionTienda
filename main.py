@@ -3,9 +3,17 @@ import uuid
 from gestion_tienda import Tienda
 
 mi_tienda = Tienda();
-mi_tienda.cargar_json_productos();
-mi_tienda.cargar_json_clientes();
-mi_tienda.cargar_json_pedidos();
+
+try:
+    mi_tienda.cargar_json_productos();
+    mi_tienda.cargar_json_clientes();
+    mi_tienda.cargar_json_pedidos();
+except:
+    mi_tienda.log_app("""
+    No se han cargado los json. Puede que sea hayan borrado los propios archivos o los diccionarios que contienen.
+    Deberían crearse automáticamente al crear nuevos productos, clientes y pedidos.
+    """);
+
 
 while True:
 
@@ -622,6 +630,10 @@ while True:
         except:
             print("Error inesperado al mostrar Lista de Pedidos");
             mi_tienda.log_app("Error inesperado al mostrar Lista de Pedidos");
+        
+    elif operacion.lower() == "f": # ANALITICA
+
+        print(mi_tienda.crear_csv_pedidos());
 
     elif operacion.lower() == "x":
         exit(0);

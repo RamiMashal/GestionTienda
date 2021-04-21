@@ -20,3 +20,7 @@ class Producto():
             "Precio/Unidad": self.precio,
             "Stock": self.stock
         };
+    
+    def formato_csv(self):
+
+        return f"{self.tipo},{self.nombre},{self.marca},{self.precio},{self.stock}";
