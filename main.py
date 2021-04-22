@@ -1,5 +1,6 @@
 import time
 import uuid
+import pandas as pd
 from gestion_tienda import Tienda
 
 mi_tienda = Tienda();
@@ -17,27 +18,18 @@ except:
 
 while True:
 
-    print("""\tGestión de Tienda
-    [0] Crear nuevo producto
-    [1] Modificar producto
-    [2] Consultar producto
-    [3] Eliminar producto
-    [4] Mostrar productos
-    -----------------------
-    [5] Crear nuevo cliente
-    [6] Modificar cliente
-    [7] Consultar cliente
-    [8] Eliminar cliente
-    [9] Mostrar clientes
-    ----------------------
-    [a] Crear nuevo pedido
-    [b] Modificar la cantidad de pedido
-    [c] Consultar pedido
-    [d] Eliminar pedido
-    [e] Mostrar pedidos
-    --------------
+    print("""
+    \tGestión de Tienda
+
+    [0] Crear nuevo producto * [5] Crear nuevo cliente * [a] Crear nuevo pedido           * [f] Nº de pedidos por cliente
+    [1] Modificar producto   * [6] Modificar cliente   * [b] Modificar cantidad de pedido * [g] Mostrar pedidos ordenados por fecha
+    [2] Consultar producto   * [7] Consultar cliente   * [c] Consultar pedido             * [h] Mostrar pedidos ordenados por ID_Cliente
+    [3] Eliminar producto    * [8] Eliminar cliente    * [d] Eliminar pedido              * [i] Mostrar pedidos ordenados por cantidad
+    [4] Mostrar productos    * [9] Mostrar clientes    * [e] Mostrar pedidos              * [j] Mostrar pedidos ordenados por precio total
+    --------------------------------------------------------------------------------------------------------------------------------------
+
     [x] Cerrar app
-    """)
+    """);
 
     operacion = input("Elige operación: ");
 
@@ -261,12 +253,19 @@ while True:
         except:
             mi_tienda.log_app("Error inesperado al guardar lista productos en json");
 
-    elif operacion == "4": # MOSTRAR LISTA DE PRODUCTOS
+    elif operacion == "4": # MOSTRAR LISTA DE PRODUCTOS ORDENADOS POR ORDEN ALFABÉTICO
+        mi_tienda.log_app("Mostrando Lista de Productos por orden alfabético");
+        print("\nLista de Productos por orden alfabético\n");
+
         try:
-            print(mi_tienda.mostrar_productos());
+            mi_tienda.crear_csv_productos();
+            df_productos = pd.read_csv("csv_productos.csv", header=0);
+            df_productos_nombre = df_productos.sort_values(by="Nombre", ascending=True);
+            print(df_productos_nombre);
+
+            mi_tienda.log_app("Lista de Productos por orden alfabético mostrada");
         except:
-            print("Error inesperado al mostrar Lista de Productos");
-            mi_tienda.log_app("Error inesperado al mostrar Lista de Productos");
+            mi_tienda.log_app("Error al mostrar Lista de Productos por orden alfabético");
 
     elif operacion == "5": # CREAR NUEVO CLIENTE
         
@@ -514,11 +513,18 @@ while True:
             mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
     elif operacion == "9": # MOSTRAR LISTA DE CLIENTES
+        mi_tienda.log_app("Mostrando Lista de Clientes");
+        print("\nLista de Clientes\n");
+
         try:
-            print(mi_tienda.mostrar_clientes());
+            mi_tienda.crear_csv_clientes(); 
+            df_clientes = pd.read_csv("csv_clientes.csv", header=0);
+            df_clientes_nombre = df_clientes.sort_values(by="Nombre", ascending=True);
+            print(df_clientes_nombre);
+
+            mi_tienda.log_app("Lista de Clientes mostrada");
         except:
-            print("Error inesperado al mostrar Lista de Clientes");
-            mi_tienda.log_app("Error inesperado al mostrar Lista de Clientes");
+            mi_tienda.log_app("Error al mostrar Lista de Clientes");
 
     elif operacion.lower() == "a": # CREAR NUEVO PEDIDO
 
@@ -631,9 +637,75 @@ while True:
             print("Error inesperado al mostrar Lista de Pedidos");
             mi_tienda.log_app("Error inesperado al mostrar Lista de Pedidos");
         
-    elif operacion.lower() == "f": # ANALITICA
+    elif operacion.lower() == "f": # RANKING NÚMERO DE PEDIDOS POR CLIENTE
+        mi_tienda.log_app("Mostrando Ranking Nº pedidos por cliente");
 
-        print(mi_tienda.crear_csv_pedidos());
+        try:
+            mi_tienda.crear_csv_pedidos();
+            df_pedidos = pd.read_csv("csv_pedidos.csv", header=0);
+            ranking_pedidos = df_pedidos["ID_Cliente"].value_counts();
+            print("\nID_Cliente ---------------------------- Nº Pedidos\n");
+            print(ranking_pedidos);
+
+            mi_tienda.log_app("Ranking Nº pedidos por cliente mostrado");
+        except:
+            mi_tienda.log_app("Error al mostrar Ranking Nº pedidos por cliente");
+    
+    elif operacion.lower() == "g": # RANKING PEDIDOS ORDENADOS POR FECHA (MÁS RECIENTE)
+        mi_tienda.log_app("Mostrando Ranking pedidos por fecha");
+        print("\nPedidos ordenados por fecha más reciente\n");
+
+        try:
+            mi_tienda.crear_csv_pedidos();
+            df_pedidos = pd.read_csv("csv_pedidos.csv", header=0);
+            df_fechas_pedidos = df_pedidos.sort_values(by="Fecha_pedido", ascending=False);
+            print(df_fechas_pedidos);
+
+            mi_tienda.log_app("Ranking pedidos por fecha mostrado");
+        except:
+            mi_tienda.log_app("Error al mostrar Ranking pedidos por fecha");
+    
+    elif operacion.lower() == "h": # PEDIDOS ORDENADOS POR ID_CLIENTE
+        mi_tienda.log_app("Mostrando Ranking pedidos por cliente");
+        print("\nPedidos ordenados por ID_Cliente\n");
+
+        try:
+            mi_tienda.crear_csv_pedidos();
+            df_pedidos = pd.read_csv("csv_pedidos.csv", header=0);
+            df_clientes_pedidos = df_pedidos.sort_values(by="ID_Cliente");
+            print(df_clientes_pedidos);
+
+            mi_tienda.log_app("Ranking pedidos por cliente mostrado");
+        except:
+            mi_tienda.log_app("Error al mostrar Ranking pedidos por cliente");
+    
+    elif operacion.lower() == "i": # PEDIDOS ORDENADOS POR CANTIDAD
+        mi_tienda.log_app("Mostrando pedidos ordenados por cantidad");
+        print("\nPedidos ordenados por cantidad\n");
+
+        try:
+            mi_tienda.crear_csv_pedidos();
+            df_pedidos = pd.read_csv("csv_pedidos.csv", header=0);
+            df_cantidad_pedidos = df_pedidos.sort_values(by="Cantidad", ascending=False);
+            print(df_cantidad_pedidos);
+
+            mi_tienda.log_app("Pedidos ordenados por cantidad mostrados");
+        except:
+            mi_tienda.log_app("Error al mostrar pedidos ordenados por cantidad");
+    
+    elif operacion.lower() == "j": # PEDIDOS ORDENADOS POR PRECIO TOTAL
+        mi_tienda.log_app("Mostrando pedidos ordenados por Precio total");
+        print("\nPedidos ordenados por Precio total\n")
+
+        try:
+            mi_tienda.crear_csv_pedidos();
+            df_pedidos = pd.read_csv("csv_pedidos.csv", header=0);
+            df_precio_pedidos = df_pedidos.sort_values(by="Precio_total", ascending=False);
+            print(df_precio_pedidos);
+
+            mi_tienda.log_app("Pedidos ordenados por Precio total mostrados");
+        except:
+            mi_tienda.log_app("Error al mostrar pedidos ordenados por Precio total");
 
     elif operacion.lower() == "x":
         exit(0);

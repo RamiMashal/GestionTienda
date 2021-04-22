@@ -1,6 +1,5 @@
 import time
 import json
-import pandas as pd
 
 from producto import Producto
 from cliente import Cliente
@@ -218,19 +217,6 @@ class Tienda():
         
                 self.log_app(f"Producto - {nombre_producto} - eliminado");
                 return f"Producto - {nombre_producto} - eliminado";
-
-    def mostrar_productos(self): # MOSTRAR LISTA DE PRODUCTOS
-        self.log_app(f"Mostrando todos los productos...");
-
-        contador = 0;
-        lista_productos = "Tipo\tNombre\tMarca\tPrecio\tStock\n\n";
-
-        for producto in self.productos:
-            lista_productos += str(producto) + "\n\n";
-            contador += 1;
-
-        self.log_app("Lista de productos mostrada");
-        return f"{lista_productos}\nHay {contador} productos";
     
     # FUNCIONES CLIENTE
 
@@ -350,19 +336,6 @@ class Tienda():
         
                 self.log_app(f"Cliente - {id_buscar} - eliminado");
                 return f"Cliente - {id_buscar} - eliminado";
-    
-    def mostrar_clientes(self): # MOSTRAR LISTA DE CLIENTES
-        self.log_app(f"Mostrando Lista de Clientes...");
-
-        contador = 0;
-        lista_clientes = "ID\tNombre\tApellidos\tCorreo\tTelefono\tDirección\n\n";
-
-        for cliente in self.clientes:
-            lista_clientes += str(cliente) + "\n\n";
-            contador += 1;
-
-        self.log_app("Lista de clientes mostrada");
-        return f"{lista_clientes}\nHay {contador} clientes";
     
     def calc_precio_total(self, producto_pedido, cantidad_producto): # CALCULAR PRECIO TOTAL PEDIDO
         self.log_app(f"Calculando precio total pedido...");
@@ -533,7 +506,7 @@ class Tienda():
 
         self.log_app("'lista_pedidos.json' cargada en lista de pedidos");
     
-    # ----------------------------- FUNCIONES ANALÍTICA -----------------------------
+    # ----------------------------- FUNCIONES CSV -----------------------------
 
     def crear_csv_pedidos(self):
         self.log_app("Guardando csv pedidos");
@@ -546,5 +519,31 @@ class Tienda():
                 fila = pedido.formato_csv() + "\n";
                 csv_pedidos.write(fila);
         
-        self.log_app("Csv guardado");
+        self.log_app("Csv pedidos guardado");
+    
+    def crear_csv_productos(self):
+        self.log_app("Guardando csv productos");
+
+        with open("csv_productos.csv", "w", encoding="utf8") as csv_productos:
+
+            columnas = "Tipo de Producto,Nombre,Marca,Precio/Unidad,Stock";
+            csv_productos.write(columnas + "\n");
+            for producto in self.productos:
+                fila = producto.formato_csv() + "\n";
+                csv_productos.write(fila);
+        
+        self.log_app("Csv productos guardado");
+    
+    def crear_csv_clientes(self):
+        self.log_app("Guardando csv clientes");
+
+        with open("csv_clientes.csv", "w", encoding="utf8") as csv_clientes:
+
+            columnas = "ID_Cliente,Nombre,Apellidos,Correo,Teléfono,Dirección";
+            csv_clientes.write(columnas + "\n");
+            for cliente in self.clientes:
+                fila = cliente.formato_csv() + "\n";
+                csv_clientes.write(fila);
+        
+        self.log_app("Csv clientes guardado");
 

@@ -1,18 +1,1 @@
-{
-    "clientes": [
-        {
-            "ID_Cliente": "d5640a72-bc47-4465-b532-1f9a586a7200",
-            "Nombre": "Rami",
-            "Apellidos": "Mashal",
-            "Correo": "ramimfn@gmail.com",
-            "Telefono": "657505525",
-            "Direccion": {
-                "Calle": "Ileescas",
-                "Portal": "129",
-                "Piso": "2",
-                "Letra": "c",
-                "Codigo Postal": "28024"
-            }
-        }
-    ]
-}
+{"clientes": [{"ID_Cliente": "d5640a72-bc47-4465-b532-1f9a586a7200", "Nombre": "Rami", "Apellidos": "Mashal", "Correo": "ramimfn@gmail.com", "Telefono": "657505525", "Direccion": {"Calle": "Ileescas", "Portal": "129", "Piso": "2", "Letra": "c", "Codigo Postal": "28024"}}, {"ID_Cliente": "ecd617b5-fe75-400d-8466-fabec9f90922", "Nombre": "Aida", "Apellidos": "Mashal", "Correo": "aida@gmail.com", "Telefono": "657", "Direccion": {"Calle": "quero", "Portal": "23", "Piso": "5", "Letra": "d", "Codigo Postal": "18273"}}, {"ID_Cliente": "e6d1400b-d1cf-4e78-a20d-9aed695b501c", "Nombre": "Mar\u00eda", "Apellidos": "Jim\u00e9nez", "Correo": "m@f.com", "Telefono": "654756546", "Direccion": {"Calle": "oca\u00f1a", "Portal": "4", "Piso": "3", "Letra": "a", "Codigo Postal": "45365"}}, {"ID_Cliente": "775772aa-c9bc-4aed-a170-ce492be2effb", "Nombre": "Zaida", "Apellidos": "g\u00f3mez", "Correo": "zaida@gmail.com", "Telefono": "6365536", "Direccion": {"Calle": "alcal\u00e1", "Portal": "5", "Piso": "4", "Letra": "w", "Codigo Postal": "65432"}}, {"ID_Cliente": "741dcdaa-4455-425d-b553-a69dedeae489", "Nombre": "vanesa", "Apellidos": "anaya", "Correo": "g@.com", "Telefono": "63456", "Direccion": {"Calle": "wfgw", "Portal": "4", "Piso": "4", "Letra": "q", "Codigo Postal": "64532"}}, {"ID_Cliente": "cc525ecb-445a-4fb6-9f26-aabc60a630f4", "Nombre": "Beatriz", "Apellidos": "fwef", "Correo": "beba@gmail.com", "Telefono": "34526", "Direccion": {"Calle": "rwefgw", "Portal": "4", "Piso": "3", "Letra": "q", "Codigo Postal": "25545"}}]}
