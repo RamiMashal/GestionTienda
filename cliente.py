@@ -22,7 +22,15 @@ class Cliente():
             "Telefono": self.telefono,
             "Direccion": self.direccion
         };
-    
+
+    direccion_csv = "";
+
+    def formato_direccion_csv(self, direccion_csv):
+        direccion_csv = "";
+        for clave, valor  in self.direccion.items():
+            direccion_csv += f"{clave}: {valor} ";
+        return direccion_csv;
+
     def formato_csv(self):
 
-        return f"{self.id_cliente},{self.nombre},{self.apellidos},{self.correo},{self.telefono},{self.direccion}";
+        return f"{self.id_cliente},{self.nombre},{self.apellidos},{self.correo},{self.telefono},{self.formato_direccion_csv(self.direccion_csv)}";

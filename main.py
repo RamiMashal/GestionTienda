@@ -26,7 +26,7 @@ while True:
     [2] Consultar producto   * [7] Consultar cliente   * [c] Consultar pedido             * [h] Mostrar pedidos ordenados por ID_Cliente
     [3] Eliminar producto    * [8] Eliminar cliente    * [d] Eliminar pedido              * [i] Mostrar pedidos ordenados por cantidad
     [4] Mostrar productos    * [9] Mostrar clientes    * [e] Mostrar pedidos              * [j] Mostrar pedidos ordenados por precio total
-    --------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------- * [k] Ventas por mes
 
     [x] Cerrar app
     """);
@@ -512,9 +512,9 @@ while True:
         except:
             mi_tienda.log_app("Error inesperado al guardar lista clientes en json");
 
-    elif operacion == "9": # MOSTRAR LISTA DE CLIENTES
-        mi_tienda.log_app("Mostrando Lista de Clientes");
-        print("\nLista de Clientes\n");
+    elif operacion == "9": # MOSTRAR LISTA DE CLIENTES POR ORDEN ALFABÉTICO
+        mi_tienda.log_app("Mostrando Lista de Clientes por orden alfabético");
+        print("\nLista de Clientes por orden alfabético\n");
 
         try:
             mi_tienda.crear_csv_clientes(); 
@@ -522,9 +522,9 @@ while True:
             df_clientes_nombre = df_clientes.sort_values(by="Nombre", ascending=True);
             print(df_clientes_nombre);
 
-            mi_tienda.log_app("Lista de Clientes mostrada");
+            mi_tienda.log_app("Lista de Clientes por orden alfabético mostrada");
         except:
-            mi_tienda.log_app("Error al mostrar Lista de Clientes");
+            mi_tienda.log_app("Error al mostrar Lista de Clientes por orden alfabético");
 
     elif operacion.lower() == "a": # CREAR NUEVO PEDIDO
 
@@ -706,6 +706,17 @@ while True:
             mi_tienda.log_app("Pedidos ordenados por Precio total mostrados");
         except:
             mi_tienda.log_app("Error al mostrar pedidos ordenados por Precio total");
+        
+    elif operacion.lower() == "k": # VENTAS POR MES
+        mi_tienda.log_app("Mostrando Ranking Nº pedidos por mes");
+
+        try:
+            print("\nRanking Nº pedidos por mes:\n");
+            print(mi_tienda.ventas_mes());
+
+            mi_tienda.log_app("Ranking Nº pedidos por mes mostrado");
+        except:
+            mi_tienda.log_app("Error al mostrar Ranking Nº pedidos por mes");
 
     elif operacion.lower() == "x":
         exit(0);

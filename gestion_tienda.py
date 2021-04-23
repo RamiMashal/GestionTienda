@@ -547,3 +547,25 @@ class Tienda():
         
         self.log_app("Csv clientes guardado");
 
+    def ventas_mes(self):
+        self.log_app("Mostrando Ventas/Mes");
+
+        fechas = {
+            "01": 0,
+            "02": 0,
+            "03": 0,
+            "04": 0,
+            "05": 0,
+            "06": 0,
+            "07": 0,
+            "08": 0,
+            "09": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+        };
+        for pedido in self.pedidos:
+            fechas[pedido.fecha_pedido.split("/")[1]] += 1;
+        
+        self.log_app("Ventas/Mes");
+        return fechas;
