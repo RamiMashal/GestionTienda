@@ -1,5 +1,6 @@
 import time
 import json
+import pandas as pd
 
 from producto import Producto
 from cliente import Cliente
@@ -567,5 +568,11 @@ class Tienda():
         for pedido in self.pedidos:
             fechas[pedido.fecha_pedido.split("/")[1]] += 1;
         
-        self.log_app("Ventas/Mes");
-        return fechas;
+        df_ventas_mes = pd.DataFrame(fechas, index=[0]);
+        columnas = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        df_ventas_mes.columns = columnas;
+
+        self.log_app("Ventas/Mes mostrada");
+        return df_ventas_mes;
