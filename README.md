@@ -4,7 +4,7 @@ Este es mi segundo proyecto, el cual presenté en el curso de Python básico que
 
 El objetivo es practicar la programación orientada a objetos y la librería Pandas para el análisis de los datos.
 
-##################################
+---
 
 This is my second project, which I presented in the basic Python course I took.
 
